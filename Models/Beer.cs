@@ -19,6 +19,6 @@ namespace MyFirstDB.Models
     {
         [Key]
         public string name { get; set; }
-        public string flavor { get; set; }
+        public List<Beer> beers { get; set; }
     }
 }
