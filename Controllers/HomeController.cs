@@ -77,13 +77,25 @@ namespace MyFirstDB.Controllers
             //await dbContext.SaveChangesAsync();
 
             //LINQ queries
-
+            Hops cascade = dbContext.Hops
+                .Where(c => c.name == "Cascade")
+                .FirstOrDefault();
+            
+            List<Beer> IPAlist = dbContext.Beers
+                .Where(c => c.style == "IPA")
+                .ToList();
+            List<Beer> TopRated = dbContext.Beers
+                .Where(c => c.rating > 8)
+                .ToList();
+            List<Beer> cascadeBeers = dbContext.Beers
+                .Where(b => b.hops.Contains(cascade))
+                .ToList();
 
             //// DELETE operation
             ////dbContext.Companies.Remove(CompanyRead1);
             ////await dbContext.SaveChangesAsync();
 
-            return View();
+            return View(cascadeBeers);
         }
 
         public IActionResult Privacy()
